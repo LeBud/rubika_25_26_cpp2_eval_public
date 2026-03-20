@@ -10,7 +10,8 @@ class PlayField
 {
 private:
 	std::vector<GameObject*> gameObjects;
-
+	std::vector<GameObject*> aliensObjects;
+	
 public:
 	Input* controllerInput;
 	Vector2D bounds;
@@ -33,4 +34,6 @@ public:
 	void AddObject(GameObject* newObj);
 
 	void RemoveObject(GameObject* newObj);
+
+	std::vector<GameObject*>& GetAliensObjects();
 };

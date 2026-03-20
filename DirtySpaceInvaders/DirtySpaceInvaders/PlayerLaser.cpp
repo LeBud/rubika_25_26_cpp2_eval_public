@@ -26,9 +26,18 @@ void PlayerLaser::Update(PlayField& world)
 		deleted = true;
 	}
 
+	for (auto alien : world.GetAliensObjects()) {
+		if (pos.IntCmp(alien->pos)) {
+			deleted = true;
+			if (alien->DecreaseHealth()) {
+				world.RemoveObject(alien);
+			}
+		}
+	}
+	
 	if (deleted)
 	{
 		world.DespawnLaser(this);
-		delete this;
+		//delete this;
 	}
 }

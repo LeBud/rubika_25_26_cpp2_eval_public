@@ -8,15 +8,18 @@
 #include <memory>
 #include <string>
 
+#include "Input.h"
+
 int main()
 {
 	// Change seed here
-	rGen.seed(1);
+	rGen.seed(2);
 
 	Vector2D size(80, 28);
 	Renderer consoleRenderer(size);
 	PlayField world(size);
-
+	world.controllerInput = new RndInput();
+	
 	intRand xCoord(0, (int)size.x- 1);
 	intRand yCoord(0, 10);
 
@@ -25,7 +28,7 @@ int main()
 	{
 		Alien& a = *(new Alien);
 		a.pos.x = (float)xCoord(rGen);
-		a.pos.x = (float)yCoord(rGen);
+		a.pos.y = (float)yCoord(rGen);
 		world.AddObject(&a);
 	}
 
@@ -34,7 +37,7 @@ int main()
 	p->pos = Vector2D(40, 27);
 	world.AddObject(p);
 
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		world.Update();
 

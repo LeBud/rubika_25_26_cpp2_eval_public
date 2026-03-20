@@ -5,7 +5,8 @@
 void PlayField::Update()
 {
 	// Update list of active objects in the world
-	for (auto it : gameObjects)
+	auto tempGO = gameObjects;
+	for (auto it : tempGO)
 	{
 		it->Update(*this);
 	}
@@ -13,16 +14,16 @@ void PlayField::Update()
 
 GameObject* PlayField::GetPlayerObject()
 {
-	auto it = std::find_if(gameObjects.begin(), gameObjects.end(), [](GameObject* in) { return (strcmp(in->m_objType, "playerShip") == 0); });
+	auto it = std::find_if(gameObjects.begin(), gameObjects.end(), [](GameObject* in) { return (strcmp(in->m_objType, "PlayerShip") == 0); });
 	if (it != gameObjects.end())
 		return (*it);
-	else
-		return nullptr;
+
+	return nullptr;
 }
 
 void PlayField::SpawnLaser(GameObject* newObj)
 {
-	if (strcmp(newObj->m_objType, "alienLaser") == 0)
+	if (strcmp(newObj->m_objType, "AlienLaser") == 0)
 		AlienLasers--;
 
 	else if (strcmp(newObj->m_objType, "PlayerLaser") == 0)
@@ -45,11 +46,21 @@ void PlayField::DespawnLaser(GameObject* newObj)
 void PlayField::AddObject(GameObject* newObj)
 {
 	gameObjects.push_back(newObj);
+	if (strcmp(newObj->m_objType, "AlienShip") == 0)
+		aliensObjects.push_back(newObj);
 }
 
 void PlayField::RemoveObject(GameObject* newObj)
 {
 	auto it = std::find_if(gameObjects.begin(), gameObjects.end(), [&](GameObject* in) { return (in == newObj); });
-	delete* it;
 	gameObjects.erase(it);
+	if (strcmp(newObj->m_objType, "AlienShip") == 0) {
+		auto alienIt = std::find_if(aliensObjects.begin(), aliensObjects.end(), [&](GameObject* in) { return (in == newObj); });
+		aliensObjects.erase(alienIt);
+	}
+	delete newObj;
+}
+
+std::vector<GameObject*>& PlayField::GetAliensObjects() {
+	return aliensObjects;
 }

@@ -35,6 +35,6 @@ void AlienLaser::Update(PlayField& world)
 
 	if (deleted)
 	{
-		world.DespawnLaser((GameObject*)this);
+		world.DespawnLaser(this);
 	}
 }

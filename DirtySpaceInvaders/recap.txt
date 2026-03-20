@@ -3,3 +3,39 @@ Exemple
 Problème : J'ai faim
 Cause : Je n'ai pas mangé
 Solution : Je mange
+
+Problème : Input nullptr
+Cause : Jamais créer
+Solution : Le créer au lancement
+
+Problème : it->Update(*this), it failed read memory for m_objtType et sprite
+Cause : Itération sur une liste qui se réalloue
+Solution : Itérer sur une copy de la liste
+
+Problème : Laser Alien non reconnue
+Cause : m_objectType not the same in AlienLaser and SpawnLaser()
+Solution : mettre le même nom
+
+Problème : delete* it in RemoveObject()
+Cause : delete une copy de newObject
+Solution : delete newObj
+
+Problème : Impossible de tuer les Aliens
+Cause : Pas de fonction pour les trouver
+Solution : Ajouter une fonction pour les avoirs
+
+Problème : Laser player ne touche pas/détruise pas les Aliens
+Cause : Fonction manquante dans le PlayerLaser
+Solution : Ajouter la fonction
+
+Problème : Alien DecreaseHealth never used
+Cause : Fonction manquante dans le PlayerLaser
+Solution : Ajouter la fonction
+
+Problème : Disposition des Aliens
+Cause : position Y jamais mise
+Solution : Corriger pour appliquer la position Y
+
+Problème : Seed 2 se termine plus tôt que la version clean
+Cause : Nombre de boucle de la update
+Solution : Passer de 100 à 1000 boucles
