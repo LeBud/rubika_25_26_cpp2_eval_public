@@ -19,7 +19,50 @@
 
 int count_islands(std::vector<std::vector<char>>& grid)
 {
-	return -1;
+    int island_count = 0;
+    bool isFirstLand = false;
+    
+    for (int row = 0; row < grid.size(); row++) {
+        for (int col = 0; col < grid[row].size(); col++) {
+            if (grid[row][col] == '0') continue;
+
+            if (!isFirstLand) {
+                island_count++;
+                isFirstLand = true;
+            }
+            
+            bool adjacentLand = false;
+            
+            if (row < grid.size() - 1) {
+                if (grid[row + 1][col] == '1') {
+                    adjacentLand = true;
+                }
+            }
+            if (row > 0) {
+                if (grid[row - 1][col] == '1') {
+                    adjacentLand = true;
+                }
+            }
+            if (col < grid[0].size() - 1) {
+                if (grid[row][col + 1] == '1') {
+                    adjacentLand = true;
+                }
+            }
+            if (col > 0) {
+                if (grid[row][col - 1] == '1') {
+                    adjacentLand = true;
+                }
+            }
+
+            if (!adjacentLand) {
+                island_count++;
+            }
+
+            
+        }
+    }
+    
+	return island_count;
 }
 
 int main()
